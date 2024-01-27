@@ -1,6 +1,7 @@
 from logic.Site import Site
 from ui.input_validation import select_item
 
+
 class ConsoleUI:
     bookmarks = None
 
