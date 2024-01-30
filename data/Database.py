@@ -9,7 +9,7 @@ class Database:
         google = Site("https://www.google.com/", "Google Search", "Biggest search engine on the web.")
         bing = Site("https://www.bing.com/", "Bing Search", "Search engine from MicroSoft. Now with AI.")
         pcc = RegisteredSite("https://www.pcc.edu/", "PCC Homepage", "My school", "marc.goodman", "???")
-        imdb = Site("https://www.imdb.com/", "Internet Movie Database", "All movies, TV series, etc.")
+        imdb = Site("https://www.IMDB.com/", "Internet Movie Database", "All movies, TV series, etc.")
         boa = RegisteredSite("https://bankofamerica.com/", "Bank of America", "My bank", "marc.goodman", "???")
         chase = Site("https://www.chase.com/", "Chase bank", "My wife's bank")
         hurawatch = Site("https://hurawatch.ru/", "Hurawatch", "Russia-located media pirate site")
