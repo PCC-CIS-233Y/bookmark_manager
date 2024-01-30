@@ -1,16 +1,16 @@
 class Site:
-    url = ""
-    title = ""
-    description = ""
-    icon = None
+    __url = ""
+    __title = ""
+    __description = ""
+    __icon = None
 
     def __init__(self, url, title, description):
-        self.url = url
-        self.title = title
-        self.description = description
+        self.__url = url
+        self.__title = title
+        self.__description = description
 
     def __str__(self):
-        return f"{self.title}: {self.url}, {self.description}"
+        return f"{self.__title}: {self.__url}, {self.__description}"
 
     @staticmethod
     def read_bookmarks():
