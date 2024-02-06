@@ -4,8 +4,8 @@ class RegisteredSite(Site):
     __account = ""
     __password = ""
 
-    def __init__(self, url, title, description, account, password):
-        super().__init__(url, title, description)
+    def __init__(self, url, title, description, last_changed, account, password):
+        super().__init__(url, title, description, last_changed)
         self.__account = account
         self.__password = password
 
