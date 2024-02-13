@@ -36,10 +36,10 @@ class Category:
         new_name = self.get_name() + "/" + other.get_name()
         try:
             new_category = Category.lookup(new_name)
-        except:
+            if new_category is not None:
+                raise Exception(f"Error! Category {new_category.get_name()} already exists!")
+        except KeyError:
             new_category = None
-        if new_category is not None:
-            raise Exception(f"Error! Category {new_category.get_name()} already exists!")
         description = self.get_description() + " and also " + other.get_description()
         # average = (self.get_level() + other.get_level()) / 2
         # average = max(self.get_level(), other.get_level())
