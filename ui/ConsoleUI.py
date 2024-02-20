@@ -95,6 +95,7 @@ class ConsoleUI:
             description = input_string("Please type a description for the category: ")
             category = Category(name, description, [])
             cls.__all_categories.append(category)
+            category.add_to_database()
             print(f"New category {name} was added!")
             return
 
@@ -110,6 +111,7 @@ class ConsoleUI:
             print(f"Error! Category {selected_category.get_name()} does not exist!")
             return
         cls.__all_categories.remove(selected_category)
+        selected_category.delete()
 
     @classmethod
     def new_bookmark(cls):
@@ -141,6 +143,8 @@ class ConsoleUI:
             description = input_string("Please enter a short description for the bookmark: ")
             site = Site(url, title, description, str(datetime.now()))
         cls.__all_bookmarks.add(site)
+        site.add_to_database()
+        cls.__all_bookmarks.add_to_database()
 
     @classmethod
     def remove_bookmark_from_category(cls):

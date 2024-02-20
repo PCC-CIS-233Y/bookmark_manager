@@ -11,3 +11,10 @@ class RegisteredSite(Site):
 
     def __str__(self):
         return super().__str__() + f" {self.__account}:{self.__password}"
+
+    def to_dict(self):
+        dict = super().to_dict()
+        dict["account"] = self.__account
+        dict["password"] = self.__password
+        dict["type"] = "RegisteredSite"
+        return dict

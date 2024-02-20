@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Site:
     __url = ""
     __title = ""
@@ -13,7 +14,22 @@ class Site:
         self.__title = title
         self.__description = description
         self.__last_changed = last_changed
-        Site.__map[url.lower()] = self
+        Site.__map[self.get_key()] = self
+
+    @classmethod
+    def build(cls, dict):
+        from logic.RegisteredSite import RegisteredSite
+
+        if dict["type"] == "Site":
+            return Site(dict["url"], dict["title"], dict["description"], dict["last_changed"])
+        elif dict["type"] == "RegisteredSite":
+            return RegisteredSite(dict["url"], dict["title"], dict["description"], dict["last_changed"],
+                                  dict["account"], dict["password"])
+        else:
+            raise Exception(f"Unknown site type: {dict['type']}!")
+
+    def get_key(self):
+        return self.__url.lower()
 
     def get_url(self):
         return self.__url
@@ -28,3 +44,18 @@ class Site:
     @classmethod
     def lookup(cls, url):
         return cls.__map[url.lower()]
+
+    def to_dict(self):
+        return {
+            "_id": self.get_key(),
+            "type": "Site",
+            "url": self.__url,
+            "title": self.__title,
+            "description": self.__description,
+            "last_changed": self.__last_changed
+        }
+
+    def add_to_database(self):
+        from data.Database import Database
+
+        Database.add_bookmark(self)
