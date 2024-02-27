@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+{% block title %}All Bookmarks{% endblock %}
+{% block header %}All Bookmarks{% endblock %}
+{% block content %}
+<ul>
+    {% for bookmark in bookmarks %}
+    <li><a href="{{ bookmark.get_url() }}">{{ bookmark.get_title() }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

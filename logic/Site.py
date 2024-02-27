@@ -31,6 +31,9 @@ class Site:
     def get_key(self):
         return self.__url.lower()
 
+    def get_title(self):
+        return self.__title
+
     def get_url(self):
         return self.__url
 

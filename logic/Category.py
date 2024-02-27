@@ -21,6 +21,12 @@ class Category:
     def get_key(self):
         return self.__name.lower()
 
+    def get_description(self):
+        return self.__description
+
+    def get_name(self):
+        return self.__name
+
     def __str__(self):
         return f"<Category: {self.__name}>"
 
