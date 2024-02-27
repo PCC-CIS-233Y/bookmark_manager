@@ -13,12 +13,12 @@ class WebUI:
     @staticmethod
     @__app.route('/print_bookmarks')
     def print_bookmarks():
-        return render_template("print_bookmarks.html", bookmarks=WebUI.__all_bookmarks)
+        return render_template("print/print_bookmarks.html", bookmarks=WebUI.__all_bookmarks)
 
     @staticmethod
     @__app.route('/print_categories')
     def print_categories():
-        return render_template("print_categories.html", categories=WebUI.__all_categories)
+        return render_template("print/print_categories.html", categories=WebUI.__all_categories)
 
     @staticmethod
     @__app.route('/print_category')
@@ -30,7 +30,7 @@ class WebUI:
         except KeyError:
             pass
         return render_template(
-            "error.html",
+            "general/error.html",
             error_header="Invalid category!",
             error_message="<p>Couldn't find category key!")
 
