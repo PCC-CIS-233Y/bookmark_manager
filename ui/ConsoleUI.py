@@ -161,6 +161,7 @@ class ConsoleUI:
             print(f"Bookmark {bookmark.get_url()} is not in catgegory {category.get_name()}!")
             return
         category.remove(bookmark)
+        category.add_to_database()
 
     @classmethod
     def insert_bookmark_into_category(cls):
@@ -174,6 +175,7 @@ class ConsoleUI:
             print(f"Bookmark {bookmark.get_url()} is already in catgegory {category.get_name()}!")
             return
         category.add(bookmark)
+        category.add_to_database()
 
     @classmethod
     def update_bookmark_description(cls):
@@ -182,6 +184,7 @@ class ConsoleUI:
             return
         description = input_string("Please type a new description for the bookmark: ")
         bookmark.set_description(description)
+        bookmark.add_to_database()
 
     @classmethod
     def join_categories(cls):
@@ -199,7 +202,7 @@ class ConsoleUI:
             return
 
         cls.__all_categories.append(new_category)
-
+        new_category.add_to_database()
 
     @classmethod
     def run(cls):

@@ -5,7 +5,7 @@
 <ul>
     {% for category in categories %}
     <li>
-        <a href="/print_category?category={{ category.get_key() }}">{{ category.get_name() }}</a>
+        <a href="/print_bookmarks?category={{ category.get_key() }}">{{ category.get_name() }}</a>
         - {{ category.get_description() }}
     </li>
     {% endfor %}

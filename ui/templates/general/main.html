@@ -1,0 +1,13 @@
+{% extends "general/default.html" %}
+{% block title %}Bookmark Manager Homepage{% endblock %}
+{% block header %}Please select an option from the list below.{% endblock %}</h1>
+{% block content %}
+    {% for group in routes %}
+    <h2>{{ group }}</h2>
+    <ul>
+        {% for route in routes[group] %}
+        <li><a href="/{{ route[0] }}">{{ route[1] }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% endblock %}

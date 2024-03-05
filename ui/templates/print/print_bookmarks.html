@@ -1,9 +1,9 @@
 {% extends "general/default.html" %}
-{% block title %}All Bookmarks{% endblock %}
-{% block header %}All Bookmarks{% endblock %}
+{% block title %}Bookmarks for {{ category.get_name() }}{% endblock %}
+{% block header %}Bookmarks for {{ category.get_name() }}{% endblock %}
 {% block content %}
 <ul>
-    {% for bookmark in bookmarks %}
+    {% for bookmark in category %}
     <li><a href="{{ bookmark.get_url() }}">{{ bookmark.get_title() }}</a></li>
     {% endfor %}
 </ul>

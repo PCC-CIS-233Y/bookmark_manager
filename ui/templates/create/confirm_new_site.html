@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}New Site Created{% endblock %}
+{% block header %}New Site Created{% endblock %}
+{% block content %}
+    <p>A new site for <b>{{ site.get_title() }}</b> has been created.</p>
+    <p><a href="/">Return to main menu.</a></p>
+{% endblock %}

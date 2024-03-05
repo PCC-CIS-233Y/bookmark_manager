@@ -1,0 +1,14 @@
+{% extends "general/default.html" %}
+{% block title %}Select a Category{% endblock %}
+{% block header %}Select a Category{% endblock %}
+{% block content %}
+    <p>Please select a category from the dropdown menu and click the PRINT button to print it.</p>
+    <form method="GET" action="print_bookmarks">
+    <select name="category">
+        {% for category in categories %}
+        <option value="{{ category.get_key() }}">{{ category.get_name() }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="PRINT">
+    </form>
+{% endblock %}
