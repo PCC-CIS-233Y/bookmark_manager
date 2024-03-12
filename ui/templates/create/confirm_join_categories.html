@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}Categories Joined{% endblock %}
+{% block header %}Categories Joined{% endblock %}
+{% block content %}
+    <p><b>{{ first_category.get_name() }}</b> was successfully joined to {{ second_category.get_name() }}.</p>
+    <p>Please click here to see the contents of <a href="/print_bookmarks?category={{ new_category.get_key() }}">{{ new_category.get_name() }}</a></p>
+{% endblock %}

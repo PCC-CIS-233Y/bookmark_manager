@@ -1,0 +1,21 @@
+{% extends "general/default.html" %}
+{% block title %}Add Bookmark to Category{% endblock %}
+{% block header %}Add Bookmark to Category{% endblock %}
+{% block content %}
+    <form method="GET" action="insert_site_into_category">
+    <p>Please select a bookmark from the dropdown menu:</p>
+    <select name="bookmark">
+        {% for bookmark in bookmarks %}
+        <option value="{{ bookmark.get_key() }}">{{ bookmark.get_title() }}</option>
+        {% endfor %}
+    </select>
+    <p>Please select a category from the dropdown menu:</p>
+    <select name="category">
+        {% for category in categories %}
+        <option value="{{ category.get_key() }}">{{ category.get_name() }}</option>
+        {% endfor %}
+    </select>
+    <p>Please click the INSERT button below:</p>
+    <input type="submit" value="INSERT">
+    </form>
+{% endblock %}

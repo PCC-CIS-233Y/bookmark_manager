@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}Updated Site{% endblock %}
+{% block header %}Updated Site{% endblock %}
+{% block content %}
+    <p>The description for the site <b>{{ bookmark.get_title() }}</b> was changed to <b>{{ bookmark.get_description() }}</b>.</p>
+    <p><a href="/">Return to main menu.</a></p>
+{% endblock %}

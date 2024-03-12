@@ -1,0 +1,21 @@
+{% extends "general/default.html" %}
+{% block title %}Join Two Categories{% endblock %}
+{% block header %}Join Two Categories{% endblock %}
+{% block content %}
+    <form method="GET" action="join_categories">
+    <p>Please select the first category to join:</p>
+    <select name="first_category">
+        {% for category in categories %}
+        <option value="{{ category.get_key() }}">{{ category.get_name() }}</option>
+        {% endfor %}
+    </select>
+    <p>Please select the second category to join:</p>
+    <select name="second_category">
+        {% for category in categories %}
+        <option value="{{ category.get_key() }}">{{ category.get_name() }}</option>
+        {% endfor %}
+    </select>
+    <p>Please click the JOIN button below:</p>
+    <input type="submit" value="JOIN">
+    </form>
+{% endblock %}

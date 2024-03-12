@@ -27,6 +27,9 @@ class Category:
     def get_name(self):
         return self.__name
 
+    def get_bookmarks(self):
+        return self.__bookmarks
+
     def __str__(self):
         return f"<Category: {self.__name}>"
 

@@ -1,0 +1,17 @@
+{% extends "general/default.html" %}
+{% block title %}Update Site{% endblock %}
+{% block header %}Update Site{% endblock %}
+{% block content %}
+    <form method="GET" action="update_site">
+    <p>Please select a bookmark from the dropdown menu:</p>
+    <select name="bookmark">
+        {% for bookmark in bookmarks %}
+        <option value="{{ bookmark.get_key() }}">{{ bookmark.get_title() }}</option>
+        {% endfor %}
+    </select>
+    <p>Please type the new description below:</p>
+    <input type="text" name="description">
+    <p>Please click the UPDATE button below:</p>
+    <input type="submit" value="UPDATE">
+    </form>
+{% endblock %}

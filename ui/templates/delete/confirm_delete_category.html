@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}Deleted Category{% endblock %}
+{% block header %}Deleted Category{% endblock %}
+{% block content %}
+    <p>The category <b>{{ category.get_name() }}</b> was successfully deleted.</p>
+    <p><a href="/">Return to main menu.</a></p>
+{% endblock %}

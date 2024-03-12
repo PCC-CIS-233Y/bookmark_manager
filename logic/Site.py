@@ -37,6 +37,9 @@ class Site:
     def get_url(self):
         return self.__url
 
+    def get_description(self):
+        return self.__description
+
     def set_description(self, description):
         self.__description = description
         self.__last_changed = str(datetime.now())

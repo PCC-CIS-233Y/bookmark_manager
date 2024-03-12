@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}New Category Created{% endblock %}
+{% block header %}New Category Created{% endblock %}
+{% block content %}
+    <p>A new category named <b>{{ category.get_name() }}</b> has been created.</p>
+    <p><a href="/">Return to main menu.</a></p>
+{% endblock %}

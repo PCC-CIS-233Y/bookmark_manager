@@ -1,0 +1,7 @@
+{% extends "general/default.html" %}
+{% block title %}Deleted Site from Category{% endblock %}
+{% block header %}Deleted Site from Category{% endblock %}
+{% block content %}
+    <p>The site <b>{{ bookmark.get_title() }}</b> was deleted from the category <b>{{ category.get_name() }}</b>.</p>
+    <p><a href="/">Return to main menu.</a></p>
+{% endblock %}
