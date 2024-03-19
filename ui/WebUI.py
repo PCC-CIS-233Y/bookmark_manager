@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 from logic.Site import Site
 from logic.RegisteredSite import RegisteredSite
 from logic.Category import Category
@@ -33,6 +34,41 @@ class WebUI:
     @classmethod
     def init(cls):
         cls.__all_bookmarks, cls.__all_categories = Category.read_data()
+
+    @staticmethod
+    @__app.route("/get_user")
+    def get_user():
+        if "username" in session:
+            return session["username"]
+        else:
+            return "No user"
+
+    @staticmethod
+    @__app.route("/login")
+    def login():
+        from logic.User import User
+
+        username = request.args["username"]
+        password = request.args["password"]
+        user = User.read_user(username)
+        if user is None:
+            return "Login failed"
+        result = user.verify_user(password)
+        if result:
+            return "Login successful!"
+        else:
+            return "Login failed"
+
+    @staticmethod
+    @__app.route("/set_user")
+    def set_user():
+        if "username" in request.args:
+            username = request.args["username"]
+            session["username"] = username
+            return "OK"
+        else:
+            return "No username specified"
+
 
     @staticmethod
     @__app.route("/print_bookmarks_form")
@@ -361,7 +397,9 @@ class WebUI:
 
     @classmethod
     def run(cls):
-        cls.__app.run(host='0.0.0.0', port=8000)
+        cls.__app.secret_key = "This is a secret key"
+        cls.__app.config["SESSION_TYPE"] = "filesystem"
+        cls.__app.run(host='0.0.0.0', port=8443, ssl_context=("cert.pem", "key.pem"))
 
 
 if __name__ == '__main__':
