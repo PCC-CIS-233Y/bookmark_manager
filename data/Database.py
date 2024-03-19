@@ -1,24 +1,31 @@
 from logic.Site import Site
 from logic.RegisteredSite import RegisteredSite
 from logic.Category import Category
+from logic.User import User
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import configparser
+import os
 
 class Database:
     __client = None
     __bookmarks_collection = None
     __categories_collection = None
+    __users_collection = None
 
     @classmethod
     def connect(cls):
         if cls.__client is None:
-            uri = "mongodb+srv://showuser:showuser@shows.gv7nqze.mongodb.net/?retryWrites=true&w=majority"
+            config = configparser.ConfigParser()
+            config.read(os.getenv("APPDATA") + "/bookmark_manager/bookmark_manager.ini")
+            uri = f"mongodb+srv://{config['Database']['username']}:{config['Database']['username']}@{config['Database']['hostname']}/?retryWrites=true&w=majority"
             # Create a new client and connect to the server
             client = MongoClient(uri, server_api=ServerApi('1'))
             cls.__bookmarks_database = client.Bookmarks
             cls.__bookmarks_collection = cls.__bookmarks_database.Bookmarks
             cls.__categories_collection = cls.__bookmarks_database.Categories
+            cls.__users_collection = cls.__bookmarks_database.Users
             # print(client)
             # print(cls.__bookmarks_database)
             # print(cls.__bookmarks_collection)
@@ -58,6 +65,8 @@ class Database:
         cls.__categories_collection = cls.__bookmarks_database.Categories
         cls.__bookmarks_collection.drop()
         cls.__bookmarks_collection = cls.__bookmarks_database.Bookmarks
+        cls.__users_collection.drop()
+        cls.__users_collection = cls.__bookmarks_database.Users
 
         all_bookmarks, all_categories = cls.build_dummy_data()
         category_dicts = [category.to_dict() for category in all_categories]
@@ -70,11 +79,22 @@ class Database:
         #     print(bookmark)
         cls.__bookmarks_collection.insert_many(bookmark_dicts)
 
+        cls.__users_collection.insert_one(User("Marc", b'$2b$14$OUWXpXU0ZzCwjhdcVonaKekDRIUBjCSYJDBpESogykxH9PYXzNZRO').to_dict())
+
     @classmethod
     def read_data(cls):
         cls.read_bookmarks()
         all_bookmarks_category, list_of_all_categories = cls.read_categories()
         return all_bookmarks_category, list_of_all_categories
+
+    @classmethod
+    def read_user(cls, username):
+        cls.connect()
+        user_dicts = list(cls.__users_collection.find())
+        user_dict = cls.__users_collection.find_one({"_id": username.lower()})
+        if user_dict is None:
+            None
+        return User.build(user_dict)
 
     @staticmethod
     def build_dummy_data():
